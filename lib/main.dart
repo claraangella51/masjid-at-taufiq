@@ -7,10 +7,16 @@ import 'package:provider/provider.dart';
 import 'views/user/splash_screen.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await initializeDateFormatting('id_ID', null);
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(
     MultiProvider(
       providers: [
@@ -30,6 +36,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
+      locale: const Locale('id', 'ID'),
+
+      supportedLocales: const [Locale('id', 'ID'), Locale('en', 'US')],
+
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       theme: ThemeData(
         colorScheme: const ColorScheme.light(primary: Colors.black),
         progressIndicatorTheme: const ProgressIndicatorThemeData(

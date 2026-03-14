@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "813549852839",
+    "firebase_url": "https://masjid-at-taufiq-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "masjid-at-taufiq",
     "storage_bucket": "masjid-at-taufiq.firebasestorage.app"
   },
@@ -9,7 +10,26 @@
       "client_info": {
         "mobilesdk_app_id": "1:813549852839:android:8e32b39b5861e2a1af6382",
         "android_client_info": {
-          "package_name": "com.example.masjid_berhasil"
+          "package_name": "com.masjidattaufiq.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0VkvIxg5Fa0Fz9fJwWgBY0-UJ2fFkccw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813549852839:android:085272d3d17b1663af6382",
+        "android_client_info": {
+          "package_name": "con.masjidattaufiq.app"
         }
       },
       "oauth_client": [],

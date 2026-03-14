@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       HomeDashboard(fullName: widget.fullName, email: widget.email),
       BeritaScreen(),
       DonasiTabScreen(),
-      DonationHistoryScreen(),
+      RiwayatDonasiScreen(),
       AboutScreen(),
     ];
   }

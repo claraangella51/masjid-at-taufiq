@@ -6,6 +6,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:masjid_berhasil/model/admin/news_model.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class FormBerita extends StatefulWidget {
   final Berita? berita;
@@ -23,16 +24,18 @@ class _FormBeritaState extends State<FormBerita> {
   final artikel = TextEditingController();
 
   Future<void> pickDate() async {
-    DateTime? pickedDate = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2023),
       lastDate: DateTime(2035),
     );
 
-    if (pickedDate != null) {
+    if (picked != null) {
+      final formatted = DateFormat('dd MMMM yyyy', 'id_ID').format(picked);
+
       setState(() {
-        tanggal.text = DateFormat('dd MMMM yyyy', 'id_ID').format(pickedDate);
+        tanggal.text = formatted;
       });
     }
   }
@@ -161,10 +164,11 @@ class _FormBeritaState extends State<FormBerita> {
 
             const SizedBox(height: 10),
 
-            TextField(
+            TextFormField(
               controller: tanggal,
               readOnly: true,
               onTap: pickDate,
+              focusNode: FocusNode(),
               decoration: const InputDecoration(
                 labelText: "Tanggal",
                 suffixIcon: Icon(Icons.calendar_today),
