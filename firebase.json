@@ -1,1 +1,52 @@
-{"flutter":{"platforms":{"macos":{"default":{"projectId":"masjid-at-taufiq","appId":"1:813549852839:ios:f395ad02eb1fe56daf6382","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"masjid-at-taufiq","configurations":{"android":"1:813549852839:android:8e32b39b5861e2a1af6382","ios":"1:813549852839:ios:f395ad02eb1fe56daf6382"}}},"android":{"default":{"projectId":"masjid-at-taufiq","appId":"1:813549852839:android:8e32b39b5861e2a1af6382","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"masjid-at-taufiq","appId":"1:813549852839:ios:f395ad02eb1fe56daf6382","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "macos": {
+        "default": {
+          "projectId": "masjid-at-taufiq",
+          "appId": "1:813549852839:ios:f395ad02eb1fe56daf6382",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "masjid-at-taufiq",
+          "configurations": {
+            "android": "1:813549852839:android:8e32b39b5861e2a1af6382",
+            "ios": "1:813549852839:ios:f395ad02eb1fe56daf6382"
+          }
+        }
+      },
+      "android": {
+        "default": {
+          "projectId": "masjid-at-taufiq",
+          "appId": "1:813549852839:android:8e32b39b5861e2a1af6382",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "masjid-at-taufiq",
+          "appId": "1:813549852839:ios:f395ad02eb1fe56daf6382",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "disallowLegacyRuntimeConfig": true,
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ]
+}

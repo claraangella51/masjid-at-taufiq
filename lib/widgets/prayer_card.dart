@@ -1,5 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class PrayerCard extends StatefulWidget {
   final Map<String, dynamic> data;
@@ -14,6 +18,9 @@ class _PrayerCardState extends State<PrayerCard> {
   DateTime now = DateTime.now();
   Timer? timer;
 
+  String locationName = "Memuat lokasi...";
+  Map<String, String> prayerTimes = {};
+
   @override
   void initState() {
     super.initState();
@@ -23,12 +30,60 @@ class _PrayerCardState extends State<PrayerCard> {
         now = DateTime.now();
       });
     });
+
+    loadLocationAndTimes();
   }
 
   @override
   void dispose() {
     timer?.cancel();
     super.dispose();
+  }
+
+  Future<void> loadLocationAndTimes() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      double lat = position.latitude;
+      double lon = position.longitude;
+
+      /// reverse geocoding
+      List<Placemark> placemarks = await placemarkFromCoordinates(lat, lon);
+      if (placemarks.isNotEmpty) {
+        setState(() {
+          locationName =
+              placemarks.first.subLocality ??
+              placemarks.first.locality ??
+              "Lokasi";
+        });
+      }
+
+      /// fetch prayer times from Aladhan API
+      final url = Uri.parse(
+        "https://api.aladhan.com/v1/timings?latitude=$lat&longitude=$lon&method=11",
+      );
+
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        final timings = json["data"]["timings"];
+
+        setState(() {
+          prayerTimes = {
+            "Subuh": timings["Fajr"],
+            "Dzuhur": timings["Dhuhr"],
+            "Ashar": timings["Asr"],
+            "Maghrib": timings["Maghrib"],
+            "Isya": timings["Isha"],
+          };
+        });
+      }
+    } catch (e) {
+      debugPrint("Lokasi error: $e");
+    }
   }
 
   DateTime parseTime(String time) {
@@ -43,6 +98,8 @@ class _PrayerCardState extends State<PrayerCard> {
   }
 
   Map<String, String> getTimes() {
+    if (prayerTimes.isNotEmpty) return prayerTimes;
+
     return {
       "Subuh": widget.data["Fajr"],
       "Dzuhur": widget.data["Dhuhr"],
@@ -99,11 +156,14 @@ class _PrayerCardState extends State<PrayerCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Row(
+              Row(
                 children: [
-                  Icon(Icons.location_on, color: Colors.white, size: 16),
-                  SizedBox(width: 4),
-                  Text("Cempaka Putih", style: TextStyle(color: Colors.white)),
+                  const Icon(Icons.location_on, color: Colors.white, size: 16),
+                  const SizedBox(width: 4),
+                  Text(
+                    locationName,
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ],
               ),
 

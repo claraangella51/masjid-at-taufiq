@@ -32,12 +32,6 @@ class _BeritaScreenState extends State<BeritaScreen> {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: Icon(Icons.notifications_none, color: Colors.black),
-          ),
-        ],
       ),
       body: Container(
         decoration: const BoxDecoration(
